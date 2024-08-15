@@ -50,8 +50,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Lab2Theme {
-                LemonApp()
-                LemonadeText()
+                LemonApp() //llama a la función definida
+                LemonadeText() //llama a la función para le título
             }
         }
     }
@@ -60,42 +60,42 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonApp() {
     var currentStep by remember { mutableStateOf(1)} //declarar variable donde se guarde y recuerde la acción del usuario
-    var clickCuantity = (2..4).random()
-    var currentClicks by remember { mutableStateOf(0)}
+    var clickCuantity = (2..4).random() //declarar variable donde se establece la cantidad de clicks para exprimir el limón
+    var currentClicks by remember { mutableStateOf(0)} // declarar variable conde se guarda la cantidad de clicks dados por el usuario
 
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background // color para backgrounds
+        modifier = Modifier.fillMaxSize(), //ocupa toda la pantalla
+        color = MaterialTheme.colorScheme.background
     ) {
-        when(currentStep){ //observer
+        when(currentStep){ //observer, cuando se encuentra en un step específico muestra instrucciones específicas
             1 -> { // imagen del árbol de limones
-                Box (
+                Box ( // se pueden sobreponer imágenes
                     contentAlignment = Alignment.Center, // Centra la imagen dentro de la Box
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize() // box ocupa espacio máximo
                 ){
-                    Image(
-                        painter = painterResource(R.drawable.background1),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .offset(x=0.dp, y = -80.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                            .width(260.dp) // Ancho deseado
-                            .height(260.dp), // Altura deseada
+                    Image( // imagen de fondo
+                        painter = painterResource(R.drawable.background1), // llama la imagen guardada para el fondo
+                        contentDescription = null, //no se le da descripción al fondo
+                        modifier = Modifier // modifica imagen de fondo
+                            .offset(x=0.dp, y = -80.dp) // modifica posición de la imagen en la pantalla
+                            .clip(RoundedCornerShape(20.dp)) // redondea las esquinas del cuadro
+                            .width(260.dp) // ancho del cuadrado
+                            .height(260.dp), // Altura del cuadrado
                         contentScale = ContentScale.Crop
                     )
-                    Text(text = stringResource(R.string.lemon_select),
-                        textAlign = TextAlign.Center,
-                        lineHeight = 2.em,
-                        fontSize = 27.sp,
-                        fontFamily = FontFamily.Monospace,
-                        color = Color(0xff20c4f0),
-                        modifier = Modifier.offset(x=0.dp, y = 170.dp)) //usa string declarada en xml
+                    Text(text = stringResource(R.string.lemon_select), //llama al texto declarado en xml con la instrucción
+                        textAlign = TextAlign.Center, //alinea el texto en el centro
+                        lineHeight = 2.em, //espacio entre líneas
+                        fontSize = 27.sp, // tamaño de letra
+                        fontFamily = FontFamily.Monospace, // tipo de letra
+                        color = Color(0xff20c4f0), // color de letra
+                        modifier = Modifier.offset(x=0.dp, y = 170.dp)) // ubicación del texto en la pantalla
                     Spacer(modifier = Modifier.height(32.dp))
                     Image(
                         painter = painterResource(R.drawable.lemon_tree), //usa imagen importada
                         contentDescription = stringResource(R.string.lemon_tree_content_description), //usa string de descripción declarada en xml
                         modifier = Modifier
-                            .offset(x=0.dp, y = -80.dp)
+                            .offset(x=0.dp, y = -80.dp) //ubicación de la imagen
                             .wrapContentSize()
                             .clickable { //hace que pase al step 2
                                 currentStep = 2
@@ -105,11 +105,11 @@ fun LemonApp() {
             }
 
             2 -> { // imagen del limón
-                Box (
+                Box (// se pueden sobreponer imágenes
                     contentAlignment = Alignment.Center, // Centra la imagen dentro de la Box
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize() // box ocupa espacio máximo
                 ){
-                    Image(
+                    Image(// imagen de fondo
                         painter = painterResource(R.drawable.background1),
                         contentDescription = null,
                         modifier = Modifier
@@ -134,9 +134,9 @@ fun LemonApp() {
                             .offset(x=0.dp, y = -80.dp)
                             .wrapContentSize()
                             .clickable { //hace que pase al step 3
-                                println(clickCuantity)
-                                currentClicks++
-                                if (clickCuantity == currentClicks) {
+                                println(clickCuantity) //imprime en logcat cuantos clicks fueron seleccionados
+                                currentClicks++ // contador de la cantidad de clicks que ya dio el usuario
+                                if (clickCuantity == currentClicks) { // si la cantidad asignada por el random es igual a los clicks dados pasa al step 3
                                     currentStep = 3
                                 }
                             }
@@ -145,11 +145,11 @@ fun LemonApp() {
             }
 
             3 -> { // imagen del vaso de limonada
-                Box (
+                Box (// se pueden sobreponer imágenes
                     contentAlignment = Alignment.Center, // Centra la imagen dentro de la Box
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize() // box ocupa espacio máximo
                 ){
-                    Image(
+                    Image( // imagen de fondo
                         painter = painterResource(R.drawable.background1),
                         contentDescription = null,
                         modifier = Modifier
@@ -181,11 +181,11 @@ fun LemonApp() {
             }
 
             4 -> { // imagen del vaso vacío
-                Box (
+                Box (// se pueden sobreponer imágenes
                     contentAlignment = Alignment.Center, // Centra la imagen dentro de la Box
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize() // box ocupa espacio máximo
                 ){
-                    Image(
+                    Image( // imagen de fondo
                         painter = painterResource(R.drawable.background1),
                         contentDescription = null,
                         modifier = Modifier
@@ -211,8 +211,8 @@ fun LemonApp() {
                             .wrapContentSize()
                             .clickable { //hace que pase al step 1
                                 currentStep = 1
-                                currentClicks = 0
-                                clickCuantity = (2..4).random()
+                                currentClicks = 0 // reinicia la cantidad de clicks dados por el usuario
+                                clickCuantity = (2..4).random() // vuelve a realizar el random para que la cantidad de cllicks requeridos para exprimir el limon sean difernetes a la corrida anterior
                             }
                     )
                 }
@@ -228,7 +228,7 @@ fun LemonadeText() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ){
-        Text(text = "Lemonade",
+        Text(text = stringResource(R.string.title),
             modifier = Modifier.offset(x=0.dp, y = 50.dp),
             textAlign = TextAlign.Center,
             color = Color(0xffffc614),
